@@ -1,0 +1,26 @@
+{
+  "name": "Boost Converter-based DC Microgrid",
+  "description": "A boost converter with constant power load (CPL) uncertainties",
+  "bandwidth_hz": 150.0,
+  "relative_degree": 2,
+
+  "output_eq": "x2",
+  "target_param_key": "Vref",
+  "target_default": 50.0,
+
+  "physics_model": {
+    "state_vars": ["x1", "x2"],
+    "control_input": "u",
+    "disturbances": ["i_load"],
+    "params": {
+      "L": "Inductance",
+      "C": "Capacitance",
+      "Vin": "Input Voltage"
+    },
+    "dynamics": {
+      "dx1/dt": "(Vin - (1-u)*x2) / L",
+      "dx2/dt": "((1-u)*x1 - i_load) / C"
+    }
+  }
+
+}
